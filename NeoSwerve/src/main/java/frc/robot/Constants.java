@@ -107,7 +107,7 @@ public final class Constants {
 		public static final class Mod0 {
 			public static final int kDriveMotorId = 1;
 			public static final int kAngleMotorId = 2;
-			public static final int kCancoderId = 1;
+			public static final int kCancoderId = 2;
 			public static final Rotation2d kAngleOffset = Rotation2d.fromDegrees(3.95);
 			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(kDriveMotorId,
 					kAngleMotorId,
@@ -118,7 +118,7 @@ public final class Constants {
 		public static final class Mod1 {
 			public static final int kDriveMotorId = 3;
 			public static final int kAngleMotorId = 4;
-			public static final int kCancoderId = 3;
+			public static final int kCancoderId = 4;
 			public static final Rotation2d kAngleOffset = Rotation2d.fromDegrees(147.8);
 			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(kDriveMotorId,
 					kAngleMotorId,
@@ -129,7 +129,7 @@ public final class Constants {
 		public static final class Mod2 {
 			public static final int kDriveMotorId = 5;
 			public static final int kAngleMotorId = 6;
-			public static final int kCancoderId = 7;
+			public static final int kCancoderId = 6;
 			public static final Rotation2d kAngleOffset = Rotation2d.fromDegrees(73.4);
 			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(kDriveMotorId,
 					kAngleMotorId,
@@ -140,7 +140,7 @@ public final class Constants {
 		public static final class Mod3 {
 			public static final int kDriveMotorId = 7;
 			public static final int kAngleMotorId = 8;
-			public static final int kCancoderId = 5;
+			public static final int kCancoderId = 8;
 			public static final Rotation2d kAngleOffset = Rotation2d.fromDegrees(42.36);
 			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(kDriveMotorId,
 					kAngleMotorId,
