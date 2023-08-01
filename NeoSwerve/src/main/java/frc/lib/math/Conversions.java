@@ -21,30 +21,30 @@ public class Conversions {
     }
 
     /**
-     * @param counts    Falcon position counts.
-     * @param gearRatio Gear ratio between Falcon and mechanism.
+     * @param counts    NEO position counts.
+     * @param gearRatio Gear ratio between NEO and mechanism.
      * @return Mechanism degrees of rotation.
      */
-    public static double falconToDegrees(double positionCounts, double gearRatio) {
+    public static double neoToDegrees(double positionCounts, double gearRatio) {
         return positionCounts * (360.0 / (gearRatio * 2048.0));
     }
 
     /**
      * @param degrees   Mechanism degrees of rotation.
-     * @param gearRatio Gear ratio between Falcon and mechanism.
-     * @return Falcon position counts.
+     * @param gearRatio Gear ratio between NEO and mechanism.
+     * @return NEO position counts.
      */
-    public static double degreesToFalcon(double degrees, double gearRatio) {
+    public static double degreesToNeo(double degrees, double gearRatio) {
         return degrees / (360.0 / (gearRatio * 2048.0));
     }
 
     /**
-     * @param counts    Falcon velocity counts.
-     * @param gearRatio Gear ratio between Falcon and mechanism (set to 1 for
-     *                  Falcon rpm).
+     * @param counts    NEO velocity counts.
+     * @param gearRatio Gear ratio between NEO and mechanism (set to 1 for
+     *                  NEO rpm).
      * @return Mechanism rpm.
      */
-    public static double falconToRpm(double counts, double gearRatio) {
+    public static double neoToRpm(double counts, double gearRatio) {
         double motorRpm = counts * (600.0 / 2048.0);
         double mechRpm = motorRpm / gearRatio;
         return mechRpm;
@@ -52,59 +52,55 @@ public class Conversions {
 
     /**
      * @param rpm       Mechanism rpm.
-     * @param gearRatio Gear ratio between Falcon and mechanism (set to 1 for
-     *                  Falcon rpm).
-     * @return Falcon velocity counts.
+     * @param gearRatio Gear ratio between NEO and mechanism (set to 1 for
+     *                  NEO rpm).
+     * @return NEO velocity counts.
      */
-    public static double rpmToFalcon(double rpm, double gearRatio) {
+    public static double rpmToNeo(double rpm, double gearRatio) {
         double motorRPM = rpm * gearRatio;
         double sensorCounts = motorRPM * (2048.0 / 600.0);
         return sensorCounts;
     }
 
     /**
-     * @param counts        Falcon velocity counts.
+     * @param counts        NEO velocity counts.
      * @param circumference Wheel circumference.
-     * @param gearRatio     Gear ratio between Falcon and mechanism (set to 1 for
-     *                      Falcon m/s).
-     * @return Falcon velocity counts.
+     * @param gearRatio     Gear ratio between NEO and mechanism (set to 1 for
+     *                      NEO m/s).
+     * @return NEO velocity counts.
      */
-    public static double falconToMps(double counts, double circumference, double gearRatio) {
-        double wheelRpm = falconToRpm(counts, gearRatio);
-        double wheelMps = (wheelRpm * circumference) / 60;
-        return wheelMps;
+    public static double neoToMps(double counts, double maxVelocity) {
+        return counts * maxVelocity;
     }
 
     /**
      * @param velocity      Velocity m/s.
      * @param circumference Wheel circumference.
-     * @param gearRatio     Gear ratio between falcon and mechanism (set to 1 for
-     *                      Falcon m/s).
-     * @return Falcon velocity counts.
+     * @param gearRatio     Gear ratio between NEO and mechanism (set to 1 for
+     *                      NEO m/s).
+     * @return NEO velocity counts.
      */
-    public static double mpsToFalcon(double velocity, double circumference, double gearRatio) {
-        double wheelRpm = ((velocity * 60) / circumference);
-        double wheelVelocity = rpmToFalcon(wheelRpm, gearRatio);
-        return wheelVelocity;
+    public static double mpsToNeo(double velocity, double maxVelocity) {
+        return velocity / maxVelocity;
     }
 
     /**
-     * @param positionCounts Falcon position counts.
+     * @param positionCounts NEO position counts.
      * @param circumference  Wheel circumference.
-     * @param gearRatio      Gear ratio between Falcon and wheel.
+     * @param gearRatio      Gear ratio between NEO and wheel.
      * @return Meters traveled.
      */
-    public static double falconToMeters(double positionCounts, double circumference, double gearRatio) {
-        return positionCounts * (circumference / (gearRatio * 2048.0));
+    public static double neoToMeters(double positionCounts, double circumference, double gearRatio) {
+        return positionCounts * (circumference / gearRatio);
     }
 
     /**
      * @param meters        Meters traveled.
      * @param circumference Wheel circumference.
-     * @param gearRatio     Gear ratio between Falcon and wheel.
-     * @return Falcon position counts.
+     * @param gearRatio     Gear ratio between NEO and wheel.
+     * @return NEO position counts.
      */
-    public static double metersToFalcon(double meters, double circumference, double gearRatio) {
-        return meters / (circumference / (gearRatio * 2048.0));
+    public static double metersToNeo(double meters, double circumference, double gearRatio) {
+        return meters / (circumference / gearRatio);
     }
 }

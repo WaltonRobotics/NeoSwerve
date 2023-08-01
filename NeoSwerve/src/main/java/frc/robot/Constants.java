@@ -6,7 +6,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
@@ -100,8 +100,8 @@ public final class Constants {
 		public static final double kMaxVelocity = 5.0; // m/s
 		public static final double kMaxAngularVelocity = 11.5; // rad/s
 
-		public static final NeutralMode kAngleNeutralMode = NeutralMode.Coast;
-		public static final NeutralMode kDriveNeutralMode = NeutralMode.Brake;
+		public static final IdleMode kAngleIdleMode = IdleMode.kCoast;
+		public static final IdleMode kDriveIdleMode = IdleMode.kBrake;
 
 		/* Front left module */
 		public static final class Mod0 {
