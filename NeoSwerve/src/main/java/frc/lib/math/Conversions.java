@@ -64,10 +64,8 @@ public class Conversions {
 
     /**
      * @param counts        NEO velocity counts.
-     * @param circumference Wheel circumference.
-     * @param gearRatio     Gear ratio between NEO and mechanism (set to 1 for
-     *                      NEO m/s).
-     * @return NEO velocity counts.
+     * @param maxVelocity   Maximum velocity
+     * @return Velocity in m/s
      */
     public static double neoToMps(double counts, double maxVelocity) {
         return counts * maxVelocity;
@@ -75,9 +73,7 @@ public class Conversions {
 
     /**
      * @param velocity      Velocity m/s.
-     * @param circumference Wheel circumference.
-     * @param gearRatio     Gear ratio between NEO and mechanism (set to 1 for
-     *                      NEO m/s).
+     * @param maxVelocity   Maximum velocity
      * @return NEO velocity counts.
      */
     public static double mpsToNeo(double velocity, double maxVelocity) {
