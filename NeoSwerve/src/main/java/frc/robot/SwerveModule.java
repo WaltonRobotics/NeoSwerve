@@ -124,8 +124,9 @@ public class SwerveModule {
             angle = m_lastAngle;
         }
 
-        m_angleMotor.getEncoder().setPosition(Conversions.degreesToCancoder(angle.getDegrees(), kAngleGearRatio));
+        m_angleEncoder.setPosition(Conversions.degreesToCancoder(angle.getDegrees(), kAngleGearRatio));
         m_lastAngle = angle;
+        // System.out.println(m_angleMotor.getAppliedOutput());
     }
 
     private Rotation2d getAngle() {
@@ -147,7 +148,7 @@ public class SwerveModule {
                 : makePositiveDegrees(cancoderDeg) - m_angleOffset.getDegrees();
         double absolutePosition = Conversions.degreesToNeo(
                 absPosDeg, kAngleGearRatio);
-        m_angleMotor.getEncoder().setPosition(absolutePosition);
+        m_angleEncoder.setPosition(absolutePosition);
     }
 
     public void resetDriveToZero() {
