@@ -29,7 +29,7 @@ public class Swerve extends SubsystemBase {
 			flModule, frModule, rlModule, rrModule
 	};
 
-	private final Pigeon2 m_pigeon = new Pigeon2(Constants.SwerveConstants.kPigeonCanId, "Canivore");
+	private final Pigeon2 m_pigeon = new Pigeon2(Constants.SwerveConstants.kPigeonCanId);
 
 	protected final PIDController autoThetaController = new PIDController(kPthetaController, 0, kDthetaController);
 
@@ -50,6 +50,19 @@ public class Swerve extends SubsystemBase {
 
 	public void setChassisSpeeds(ChassisSpeeds targetChassisSpeeds, boolean openLoop, boolean steerInPlace) {
 		setModuleStates(kKinematics.toSwerveModuleStates(targetChassisSpeeds), openLoop, steerInPlace);
+	}
+
+	public void setCoastModules() {
+		for (SwerveModule mod : m_modules) {
+			mod.setAngleCoast();
+		}
+	}
+
+	public void setModuleAngle(double degrees) {
+		var rot2d = Rotation2d.fromDegrees(degrees);
+		for (SwerveModule mod : m_modules) {
+			mod.setAngle(rot2d);
+		}
 	}
 
 	/**
@@ -133,7 +146,7 @@ public class Swerve extends SubsystemBase {
 			yVal *= kMaxVelocity;
 			omegaVal *= kMaxAngularVelocity;
 
-			drive(xVal, yVal, omegaVal, !robotCentric.getAsBoolean(), false);
+			drive(xVal, yVal, omegaVal, !robotCentric.getAsBoolean(), true);
 		}).withName("TeleopDrive");
 	}
 

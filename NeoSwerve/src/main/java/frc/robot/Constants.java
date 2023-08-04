@@ -100,7 +100,7 @@ public final class Constants {
 		public static final double kMaxVelocity = 5.0; // m/s
 		public static final double kMaxAngularVelocity = 11.5; // rad/s
 
-		public static final IdleMode kAngleIdleMode = IdleMode.kCoast;
+		public static final IdleMode kAngleIdleMode = IdleMode.kBrake;
 		public static final IdleMode kDriveIdleMode = IdleMode.kBrake;
 
 		/* Front left module */
