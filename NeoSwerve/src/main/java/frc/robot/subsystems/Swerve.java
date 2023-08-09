@@ -101,11 +101,8 @@ public class Swerve extends SubsystemBase {
 	public void zeroGyro() {
 		m_pigeon.setYaw(180);
 		m_pigeon.addYaw(0);
-	}
-
-	public void resetToAbsolute() {
 		for (var mod : m_modules) {
-			mod.resetToAbsolute();
+			mod.setAngle(Rotation2d.fromDegrees(0));
 		}
 	}
 

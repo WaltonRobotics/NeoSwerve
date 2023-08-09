@@ -28,12 +28,12 @@ public class RobotContainer {
 	public RobotContainer() {
 		// Configure the trigger bindings
 		configureBindings();
-		// swerve.setDefaultCommand(
-		// swerve.driveTeleop(
-		// () -> driver.getLeftY(),
-		// () -> driver.getLeftX(),
-		// () -> -driver.getRightX(),
-		// () -> false));
+		swerve.setDefaultCommand(
+		swerve.driveTeleop(
+				() -> driver.getLeftY(),
+				() -> driver.getLeftX(),
+				() -> -driver.getRightX(),
+				() -> false));
 	}
 
 	/**

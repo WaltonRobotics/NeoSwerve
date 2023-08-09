@@ -11,7 +11,6 @@ import static frc.robot.Constants.SwerveConstants.kWheelCircumference;
 
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.MotorFeedbackSensor;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -24,7 +23,6 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.math.Conversions;
-import frc.lib.util.CTREModuleState;
 import frc.lib.util.SwerveModuleConstants;
 
 public class SwerveModule {
@@ -57,48 +55,8 @@ public class SwerveModule {
     }
 
     public void periodic() {
-        // SmartDashboard.putNumber("setpoint", m_angleController.)
-    }
-
-    public double makePositiveDegrees(double angle) {
-        double degrees = angle;
-        degrees = degrees % 360;
-        if (degrees < 0.0) {
-            degrees = degrees + 360;
-        }
-        return degrees;
-    }
-
-    public double makePositiveDegrees(Rotation2d angle) {
-        return makePositiveDegrees(angle.getDegrees());
-    }
-
-    public Rotation2d optimizeTurn(Rotation2d oldAngle, Rotation2d newAngle) {
-        double steerAngle = makePositiveDegrees(newAngle);
-        steerAngle %= (360);
-        if (steerAngle < 0.0) {
-            steerAngle += 360;
-        }
-
-        double difference = steerAngle - oldAngle.getDegrees();
-        // Change the target angle so the difference is in the range [-360, 360)
-        // instead of [0, 360)
-        if (difference >= 360) {
-            steerAngle -= 360;
-        } else if (difference < -360) {
-            steerAngle += 360;
-        }
-        difference = steerAngle - oldAngle.getDegrees(); // Recalculate difference
-
-        // If the difference is > 90 deg < -90 deg the drive can be inverted so the
-        // total movement of the module is < 90 deg
-        if (difference > 90 || difference < -90) {
-            // Only need to add 180 deg here because the target angle will be put back
-            // into the range [0, 2pi)
-            steerAngle += 180;
-        }
-
-        return Rotation2d.fromDegrees(makePositiveDegrees(steerAngle));
+        SmartDashboard.putNumber(moduleName + " angle position", m_angleEncoder.getPosition());
+        SmartDashboard.putNumber(moduleName + " drive position", getDriveMotorPosition());
     }
 
     /**
@@ -164,16 +122,6 @@ public class SwerveModule {
         m_angleController.setReference(angle.getDegrees(), ControlType.kPosition);
     }
 
-    public void resetToAbsolute() {
-        // double cancoderDeg = getCancoder().getDegrees();
-        // double absPosDeg = cancoderDeg < 0 ? makePositiveDegrees(cancoderDeg) -
-        // m_angleOffset.getDegrees() - 360
-        // : makePositiveDegrees(cancoderDeg) - m_angleOffset.getDegrees();
-        // double absolutePosition = Conversions.degreesToNeo(
-        // absPosDeg, kAngleGearRatio);
-        // m_angleEncoder.set(absolutePosition);
-    }
-
     public void resetDriveToZero() {
         m_driveMotor.getEncoder().setPosition(0);
     }
@@ -202,7 +150,6 @@ public class SwerveModule {
         m_angleMotor.setIdleMode(kAngleIdleMode);
         Timer.delay(0.1);
         m_angleMotor.burnFlash();
-        resetToAbsolute();
     }
 
     private void configDriveMotor() {
