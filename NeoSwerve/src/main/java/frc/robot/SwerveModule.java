@@ -11,6 +11,7 @@ import static frc.robot.Constants.SwerveConstants.kWheelCircumference;
 
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -96,7 +97,8 @@ public class SwerveModule {
         }
 
         m_lastAngle = angle;
-        m_angleController.setReference(angle.getDegrees(), ControlType.kPosition);
+        SmartDashboard.putNumber(moduleName + " setpoint", angle.getRotations());
+        m_angleController.setReference(angle.getRotations(), ControlType.kPosition);
     }
 
     private Rotation2d getAngle() {
@@ -119,7 +121,7 @@ public class SwerveModule {
     }
 
     public void setAngle(Rotation2d angle) {
-        m_angleController.setReference(angle.getDegrees(), ControlType.kPosition);
+        m_angleController.setReference(angle.getRotations(), ControlType.kPosition);
     }
 
     public void resetDriveToZero() {
@@ -127,14 +129,25 @@ public class SwerveModule {
     }
 
     private void configAngleEncoder() {
-        m_angleEncoder.setPositionConversionFactor(360.0);
-        m_angleEncoder.setZeroOffset(0);
+        // for(int i = 0; i < 5; i++) {
+            // var err = m_angleEncoder.setPositionConversionFactor(360.0);
+            // if (err != REVLibError.kOk) {
+            //     System.out.println("REV error, module " + moduleNumber + ", try " + i + ": " + err);
+            // } else {
+            //     break;
+            // }
+        // }
+        
+        // m_angleEncoder.setZeroOffset(0);
 
-        m_angleController.setFeedbackDevice(m_angleEncoder);
-        m_angleController.setPositionPIDWrappingEnabled(true);
-        m_angleController.setPositionPIDWrappingMinInput(0);
-        m_angleController.setPositionPIDWrappingMaxInput(360);
-        m_angleController.setP(0.02);
+        // m_angleController.setFeedbackDevice(m_angleEncoder);
+        // m_angleController.setPositionPIDWrappingEnabled(true);
+        // m_angleController.setPositionPIDWrappingMinInput(0);
+        // m_angleController.setPositionPIDWrappingMaxInput(1);
+        var err = m_angleController.setP(0.1);
+        if (err != REVLibError.kOk) {
+            System.out.println("[cfgAngEnc, setP] REV error, module " + moduleNumber + ": " + err);
+        }
         Timer.delay(0.1);
         m_angleMotor.burnFlash();
     }
@@ -145,7 +158,7 @@ public class SwerveModule {
     }
 
     private void configAngleMotor() {
-        m_angleMotor.restoreFactoryDefaults();
+        // m_angleMotor.restoreFactoryDefaults();
         m_angleMotor.setInverted(kInvertAngleMotor);
         m_angleMotor.setIdleMode(kAngleIdleMode);
         Timer.delay(0.1);
