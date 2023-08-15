@@ -12,12 +12,12 @@ import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
-	public static boolean kDebugLoggingEnabled = true;
-	public static final double kStickDeadband = 0.1;
-	public static final String kCanbus = "Canivore";
+	public static final boolean DEBUG_LOGGING_ENABLED = true;
+	public static final double STICK_DEADBAND = 0.1;
+	public static final String CANBUS = "Canivore";
 
 	public static final class SwerveConstants {
-		// public static final String kDbTabName = "SwerveSubsys";
+		public static final String DB_TAB_NAME = "Swerve";
 
 		/**
 		 * Set to true to use external CANcoder for inital zero and switch to internal
@@ -25,134 +25,124 @@ public final class Constants {
 		 * Set to false to always use external CANcoder for angle control.
 		 * Recommended to set to false and always use CANCoder.
 		 */
-		public static final boolean kUseInternalEncoder = false;
+		public static final boolean USE_INTERNAL_ENCODER = false;
 
-		public static final int kPigeonCanId = 1;
+		public static final int PIGEON_CAN_ID = 1;
 
-		public static final COTSFalconSwerveConstants kSwerveModule = COTSFalconSwerveConstants
+		public static final COTSFalconSwerveConstants SWERVE_MODULE = COTSFalconSwerveConstants
 				.SDSMK4i(COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L2);
 
 		// TODO: check these values
-		public static final double kTrackWidth = Units.inchesToMeters(33);
-		public static final double kWheelBase = Units.inchesToMeters(33);
-		public static final double kWheelCircumference = kSwerveModule.wheelCircumference;
+		public static final double TRACK_WIDTH = Units.inchesToMeters(33);
+		public static final double WHEEL_BASE = Units.inchesToMeters(33);
+		public static final double WHEEL_CIRCUMFERENCE = SWERVE_MODULE.WHEEL_CIRCUMFERENCE;
 
-		public static final Translation2d[] kModuleTranslations = {
-				new Translation2d(kWheelBase / 2.0, kTrackWidth / 2.0),
-				new Translation2d(kWheelBase / 2.0, -kTrackWidth / 2.0),
-				new Translation2d(-kWheelBase / 2.0, kTrackWidth / 2.0),
-				new Translation2d(-kWheelBase / 2.0, -kTrackWidth / 2.0)
+		public static final Translation2d[] MODULE_TRANSLATIONS = {
+				new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
+				new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
+				new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
+				new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0)
 		};
 
-		public static final SwerveDriveKinematics kKinematics = new SwerveDriveKinematics(kModuleTranslations);
+		public static final SwerveDriveKinematics KINEMATICS = new SwerveDriveKinematics(MODULE_TRANSLATIONS);
 
-		public static final double kDriveGearRatio = kSwerveModule.driveGearRatio;
-		public static final double kAngleGearRatio = kSwerveModule.angleGearRatio;
+		public static final double DRIVE_GEAR_RATIO = SWERVE_MODULE.DRIVE_GEAR_RATIO;
+		public static final double ANGLE_GEAR_RATIO = SWERVE_MODULE.ANGLE_GEAR_RATIO;
 
-		public static final boolean kInvertAngleMotor = kSwerveModule.angleMotorInvert;
-		public static final boolean kInvertDriveMotor = kSwerveModule.driveMotorInvert;
+		public static final boolean ANGLE_MOTOR_INVERTED = SWERVE_MODULE.ANGLE_MOTOR_INVERTED;
+		public static final boolean DRIVE_MOTOR_INVERTED = SWERVE_MODULE.DRIVE_MOTOR_INVERTED;
 
-		public static final boolean kInvertCancoder = kSwerveModule.cancoderInvert;
+		public static final int ANGLE_CONTINUOUS_CURRENT_LIMIT = 25;
+		public static final int ANGLE_PEAK_CURRENT_LIMIT = 40;
+		public static final double ANGLE_PEAK_CURRENT_DURATION = 0.1;
+		public static final boolean ANGLE_CURRENT_LIMIT_ENABLED = true;
 
-		public static final int kAngleContinuousCurrentLimit = 25;
-		public static final int kAnglePeakCurrentLimit = 40;
-		public static final double kAnglePeakCurrentDuration = 0.1;
-		public static final boolean kAngleEnableCurrentLimit = true;
-
-		public static final int kDriveContinuousCurrentLimit = 40;
-		public static final int kDrivePeakCurrentLimit = 70;
-		public static final double kDrivePeakCurrentDuration = 0.1;
-		public static final boolean kDriveEnableCurrentLimit = true;
+		public static final int DRIVE_CONTINUOUS_CURRENT_LIMIT = 40;
+		public static final int DRIVE_PEAK_CURRENT_LIMIT = 70;
+		public static final double DRIVE_PEAK_CURRENT_DURATION = 0.1;
+		public static final boolean DRIVE_CURRENT_LIMIT_ENABLED = true;
 
 		/*
 		 * These values are used by the drive Falcon to ramp in open loop and closed
 		 * loop driving.
 		 * We found a small open loop ramp (0.25) helps with tread wear, tipping, etc.
 		 */
-		public static final double kOpenLoopRamp = 0.25;
-		public static final double kClosedLoopRamp = 0.0;
+		public static final double OPEN_LOOP_RAMP = 0.25;
+		public static final double CLOSED_LOOP_RAMP = 0.0;
 
-		public static final double kAngleKp = kSwerveModule.angleKP;
-		public static final double kAngleKi = kSwerveModule.angleKI;
-		public static final double kAngleKd = kSwerveModule.angleKD;
-		public static final double kAngleKf = kSwerveModule.angleKF;
+		public static final double ANGLE_KP = SWERVE_MODULE.ANGLE_KP;
+		public static final double ANGLE_KI = SWERVE_MODULE.ANGLE_KI;
+		public static final double ANGLE_KD = SWERVE_MODULE.ANGLE_KD;
+		public static final double ANGLE_KF = SWERVE_MODULE.ANGLE_KF;
 
-		public static final double kDriveKp = 0.05;
-		public static final double kDriveKi = 0.0;
-		public static final double kDriveKd = 0.0;
-		public static final double kDriveKf = 0.0;
+		public static final double DRIVE_KP = 0.05;
+		public static final double DRIVE_KI = 0.0;
+		public static final double DRIVE_KD = 0.0;
+		public static final double DRIVE_KF = 0.0;
 
-		public static final double kDriveKs = 0.32 / 12;
-		public static final double kDriveKv = 1.51 / 12;
-		public static final double kDriveKa = 0.27 / 12;
+		public static final double DRIVE_KS = 0.32 / 12;
+		public static final double DRIVE_KV = 1.51 / 12;
+		public static final double DRIVE_KA = 0.27 / 12;
 
-		public static final SimpleMotorFeedforward kDriveFf = new SimpleMotorFeedforward( // real
-				kDriveKs, // Voltage to break static friction
-				kDriveKv, // Volts per meter per second
-				kDriveKa // Volts per meter per second squared
+		public static final SimpleMotorFeedforward DRIVE_FF = new SimpleMotorFeedforward( // real
+				DRIVE_KS, // Voltage to break static friction
+				DRIVE_KV, // Volts per meter per second
+				DRIVE_KA // Volts per meter per second squared
 		);
-		public static final SimpleMotorFeedforward kSteerFf = new SimpleMotorFeedforward( // real
+		public static final SimpleMotorFeedforward ANGLE_FF = new SimpleMotorFeedforward( // real
 				0.5, // Voltage to break static friction
 				0.23, // Volts per radian per second
 				0.0056 // Volts per radian per second squared
 		);
 
-		public static final double kMaxVelocity = 5.0; // m/s
-		public static final double kMaxAngularVelocity = 11.5; // rad/s
+		public static final double MAX_VELOCITY = 5.0; // m/s
+		public static final double MAX_ANGULAR_VELOCITY = 11.5; // rad/s
 
-		public static final IdleMode kAngleIdleMode = IdleMode.kBrake;
-		public static final IdleMode kDriveIdleMode = IdleMode.kBrake;
+		public static final IdleMode ANGLE_IDLE_MODE = IdleMode.kBrake;
+		public static final IdleMode DRIVE_IDLE_MODE = IdleMode.kBrake;
 
 		/* Front left module */
 		public static final class Mod0 {
-			public static final int kDriveMotorId = 1;
-			public static final int kAngleMotorId = 2;
-			public static final int kCancoderId = 2;
-			public static final Rotation2d kAngleOffset = Rotation2d.fromDegrees(3.95);
-			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(kDriveMotorId,
-					kAngleMotorId,
-					kCancoderId, kAngleOffset);
+			public static final int DRIVE_MOTOR_ID = 1;
+			public static final int ANGLE_MOTOR_ID = 2;
+			public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(3.95);
+			public static final SwerveModuleConstants CONSTANTS = new SwerveModuleConstants(DRIVE_MOTOR_ID,
+					ANGLE_MOTOR_ID, ANGLE_OFFSET);
 		}
 
 		/* Front right module */
 		public static final class Mod1 {
-			public static final int kDriveMotorId = 3;
-			public static final int kAngleMotorId = 4;
-			public static final int kCancoderId = 4;
-			public static final Rotation2d kAngleOffset = Rotation2d.fromDegrees(147.8);
-			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(kDriveMotorId,
-					kAngleMotorId,
-					kCancoderId, kAngleOffset);
+			public static final int DRIVE_MOTOR_ID = 3;
+			public static final int ANGLE_MOTOR_ID = 4;
+			public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(147.8);
+			public static final SwerveModuleConstants CONSTANTS = new SwerveModuleConstants(DRIVE_MOTOR_ID,
+					ANGLE_MOTOR_ID, ANGLE_OFFSET);
 		}
 
 		/* Back left module */
 		public static final class Mod2 {
-			public static final int kDriveMotorId = 5;
-			public static final int kAngleMotorId = 6;
-			public static final int kCancoderId = 6;
-			public static final Rotation2d kAngleOffset = Rotation2d.fromDegrees(73.4);
-			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(kDriveMotorId,
-					kAngleMotorId,
-					kCancoderId, kAngleOffset);
+			public static final int DRIVE_MOTOR_ID = 5;
+			public static final int ANGLE_MOTOR_ID = 6;
+			public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(73.4);
+			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(DRIVE_MOTOR_ID,
+					ANGLE_MOTOR_ID, ANGLE_OFFSET);
 		}
 
 		/* Back right module */
 		public static final class Mod3 {
-			public static final int kDriveMotorId = 7;
-			public static final int kAngleMotorId = 8;
-			public static final int kCancoderId = 8;
-			public static final Rotation2d kAngleOffset = Rotation2d.fromDegrees(42.36);
-			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(kDriveMotorId,
-					kAngleMotorId,
-					kCancoderId, kAngleOffset);
+			public static final int DRIVE_MOTOR_ID = 7;
+			public static final int ANGLE_MOTOR_ID = 8;
+			public static final Rotation2d ANGLE_OFFSET = Rotation2d.fromDegrees(42.36);
+			public static final SwerveModuleConstants kConstants = new SwerveModuleConstants(DRIVE_MOTOR_ID,
+					ANGLE_MOTOR_ID, ANGLE_OFFSET);
 		}
 	}
 
 	public static final class AutoConstants {
-		public static double kPxController = 3.25;
-		public static double kPyController = 3.25;
-		public static double kPthetaController = 3.15;
+		public static final double PX_CONTROLLER = 3.25;
+		public static final double PY_CONTROLLER = 3.25;
+		public static final double PTHETA_CONTROLLER = 3.15;
 
-		public static final double kDthetaController = 0.5;
+		public static final double DTHETA_CONTROLLER = 0.5;
 	}
 }

@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -20,8 +19,8 @@ import static frc.robot.Constants.AutoConstants.*;
 import static frc.robot.Constants.SwerveConstants.*;
 
 public class Swerve extends SubsystemBase {
-	private final SwerveModule flModule = new SwerveModule("FrontLeft", 0, Mod0.kConstants);
-	private final SwerveModule frModule = new SwerveModule("FrontRight", 1, Mod1.kConstants);
+	private final SwerveModule flModule = new SwerveModule("FrontLeft", 0, Mod0.CONSTANTS);
+	private final SwerveModule frModule = new SwerveModule("FrontRight", 1, Mod1.CONSTANTS);
 	private final SwerveModule rlModule = new SwerveModule("RearLeft", 2, Mod2.kConstants);
 	private final SwerveModule rrModule = new SwerveModule("RearRight", 3, Mod3.kConstants);
 
@@ -29,17 +28,14 @@ public class Swerve extends SubsystemBase {
 			flModule, frModule, rlModule, rrModule
 	};
 
-	private final Pigeon2 m_pigeon = new Pigeon2(Constants.SwerveConstants.kPigeonCanId);
+	private final Pigeon2 m_pigeon = new Pigeon2(Constants.SwerveConstants.PIGEON_CAN_ID);
 
-	protected final PIDController autoThetaController = new PIDController(kPthetaController, 0, kDthetaController);
+	protected final PIDController autoThetaController = new PIDController(PTHETA_CONTROLLER, 0, DTHETA_CONTROLLER);
 
 	private int m_periodicCallCount = 0;
 	private int m_lastPigeonGyroReq = 0;
 
 	private double[] m_pigeonGyroRateDPS = new double[3];
-
-	public Swerve() {
-	}
 
 	private void updatePigeonGyroRate() {
 		if (m_periodicCallCount > m_lastPigeonGyroReq) {
@@ -49,7 +45,7 @@ public class Swerve extends SubsystemBase {
 	}
 
 	public void setChassisSpeeds(ChassisSpeeds targetChassisSpeeds, boolean openLoop, boolean steerInPlace) {
-		setModuleStates(kKinematics.toSwerveModuleStates(targetChassisSpeeds), openLoop, steerInPlace);
+		setModuleStates(KINEMATICS.toSwerveModuleStates(targetChassisSpeeds), openLoop, steerInPlace);
 	}
 
 	public void setCoastModules() {
@@ -83,17 +79,17 @@ public class Swerve extends SubsystemBase {
 	}
 
 	public void setModuleStates(SwerveModuleState[] desiredStates, boolean openLoop, boolean steerInPlace) {
-		SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, kMaxVelocity);
+		SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, MAX_VELOCITY);
 
 		for (SwerveModule mod : m_modules) {
-			mod.setDesiredState(desiredStates[mod.moduleNumber], openLoop, steerInPlace);
+			mod.setDesiredState(desiredStates[mod.MODULE_NUMBER], openLoop, steerInPlace);
 		}
 	}
 
 	public SwerveModulePosition[] getModulePositions() {
 		SwerveModulePosition[] positions = new SwerveModulePosition[4];
 		for (SwerveModule mod : m_modules) {
-			positions[mod.moduleNumber] = mod.getPosition();
+			positions[mod.MODULE_NUMBER] = mod.getPosition();
 		}
 		return positions;
 	}
@@ -132,18 +128,17 @@ public class Swerve extends SubsystemBase {
 	}
 
 	public CommandBase driveTeleop(
-			DoubleSupplier x, DoubleSupplier y, DoubleSupplier omega,
-			BooleanSupplier robotCentric) {
+			DoubleSupplier x, DoubleSupplier y, DoubleSupplier omega) {
 		return run(() -> {
-			double xVal = MathUtil.applyDeadband(x.getAsDouble(), Constants.kStickDeadband);
-			double yVal = MathUtil.applyDeadband(y.getAsDouble(), Constants.kStickDeadband);
-			double omegaVal = MathUtil.applyDeadband(omega.getAsDouble(), Constants.kStickDeadband) * .80;
+			double xVal = MathUtil.applyDeadband(x.getAsDouble(), Constants.STICK_DEADBAND);
+			double yVal = MathUtil.applyDeadband(y.getAsDouble(), Constants.STICK_DEADBAND);
+			double omegaVal = MathUtil.applyDeadband(omega.getAsDouble(), Constants.STICK_DEADBAND) * .80;
 
-			xVal *= kMaxVelocity;
-			yVal *= kMaxVelocity;
-			omegaVal *= kMaxAngularVelocity;
+			xVal *= MAX_VELOCITY;
+			yVal *= MAX_VELOCITY;
+			omegaVal *= MAX_ANGULAR_VELOCITY;
 
-			drive(xVal, yVal, omegaVal, !robotCentric.getAsBoolean(), true);
+			drive(xVal, yVal, omegaVal, true, true);
 		}).withName("TeleopDrive");
 	}
 

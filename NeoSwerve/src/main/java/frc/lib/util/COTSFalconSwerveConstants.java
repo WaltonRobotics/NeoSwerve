@@ -4,32 +4,29 @@ import edu.wpi.first.math.util.Units;
 
 /* Contains values and required settings for common COTS swerve modules. */
 public class COTSFalconSwerveConstants {
-    public final double wheelDiameter;
-    public final double wheelCircumference;
-    public final double angleGearRatio;
-    public final double driveGearRatio;
-    public final double angleKP;
-    public final double angleKI;
-    public final double angleKD;
-    public final double angleKF;
-    public final boolean driveMotorInvert;
-    public final boolean angleMotorInvert;
-    public final boolean cancoderInvert;
+    public final double WHEEL_DIAMETER;
+    public final double WHEEL_CIRCUMFERENCE;
+    public final double ANGLE_GEAR_RATIO;
+    public final double DRIVE_GEAR_RATIO;
+    public final double ANGLE_KP;
+    public final double ANGLE_KI;
+    public final double ANGLE_KD;
+    public final double ANGLE_KF;
+    public final boolean DRIVE_MOTOR_INVERTED;
+    public final boolean ANGLE_MOTOR_INVERTED;
 
     public COTSFalconSwerveConstants(double wheelDiameter, double angleGearRatio, double driveGearRatio, double angleKP,
-            double angleKI, double angleKD, double angleKF, boolean driveMotorInvert, boolean angleMotorInvert,
-            boolean cancoderInvert) {
-        this.wheelDiameter = wheelDiameter;
-        this.wheelCircumference = wheelDiameter * Math.PI;
-        this.angleGearRatio = angleGearRatio;
-        this.driveGearRatio = driveGearRatio;
-        this.angleKP = angleKP;
-        this.angleKI = angleKI;
-        this.angleKD = angleKD;
-        this.angleKF = angleKF;
-        this.driveMotorInvert = driveMotorInvert;
-        this.angleMotorInvert = angleMotorInvert;
-        this.cancoderInvert = cancoderInvert;
+            double angleKI, double angleKD, double angleKF, boolean driveMotorInvert, boolean angleMotorInvert) {
+        WHEEL_DIAMETER = wheelDiameter;
+        WHEEL_CIRCUMFERENCE = wheelDiameter * Math.PI;
+        ANGLE_GEAR_RATIO = angleGearRatio;
+        DRIVE_GEAR_RATIO = driveGearRatio;
+        ANGLE_KP = angleKP;
+        ANGLE_KI = angleKI;
+        ANGLE_KD = angleKD;
+        ANGLE_KF = angleKF;
+        DRIVE_MOTOR_INVERTED = driveMotorInvert;
+        ANGLE_MOTOR_INVERTED = angleMotorInvert;
     }
 
     /** Swerve Drive Specialties - MK3 Module */
@@ -46,9 +43,8 @@ public class COTSFalconSwerveConstants {
 
         boolean driveMotorInvert = false;
         boolean angleMotorInvert = false;
-        boolean cancoderInvert = false;
         return new COTSFalconSwerveConstants(wheelDiameter, angleGearRatio, driveGearRatio, angleKP, angleKI, angleKD,
-                angleKF, driveMotorInvert, angleMotorInvert, cancoderInvert);
+                angleKF, driveMotorInvert, angleMotorInvert);
     }
 
     /** Swerve Drive Specialties - MK4 Module */
@@ -65,9 +61,8 @@ public class COTSFalconSwerveConstants {
 
         boolean driveMotorInvert = false;
         boolean angleMotorInvert = false;
-        boolean cancoderInvert = false;
         return new COTSFalconSwerveConstants(wheelDiameter, angleGearRatio, driveGearRatio, angleKP, angleKI, angleKD,
-                angleKF, driveMotorInvert, angleMotorInvert, cancoderInvert);
+                angleKF, driveMotorInvert, angleMotorInvert);
     }
 
     /** Swerve Drive Specialties - MK4i Module */
@@ -84,18 +79,17 @@ public class COTSFalconSwerveConstants {
 
         boolean driveMotorInvert = false;
         boolean angleMotorInvert = true;
-        boolean cancoderInvert = false;
         return new COTSFalconSwerveConstants(wheelDiameter, angleGearRatio, driveGearRatio, angleKP, angleKI, angleKD,
-                angleKF, driveMotorInvert, angleMotorInvert, cancoderInvert);
+                angleKF, driveMotorInvert, angleMotorInvert);
     }
 
     /* Drive Gear Ratios for all supported modules */
     public class driveGearRatios {
         /* SDS MK3 */
         /** SDS MK3 - 8.16 : 1 */
-        public static final double SDSMK3_Standard = (8.16 / 1.0);
+        public static final double SDSMK3_STANDARD = (8.16 / 1.0);
         /** SDS MK3 - 6.86 : 1 */
-        public static final double SDSMK3_Fast = (6.86 / 1.0);
+        public static final double SDSMK3_FAST = (6.86 / 1.0);
 
         /* SDS MK4 */
         /** SDS MK4 - 8.14 : 1 */

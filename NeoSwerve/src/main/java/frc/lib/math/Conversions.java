@@ -1,25 +1,6 @@
 package frc.lib.math;
 
 public class Conversions {
-
-    /**
-     * @param counts    CANCoder position counts.
-     * @param gearRatio Gear ratio between CANCoder and mechanism.
-     * @return Mechanism degrees of rotation.
-     */
-    public static double cancoderToDegrees(double counts, double gearRatio) {
-        return counts * (360.0 / (gearRatio * 4096.0));
-    }
-
-    /**
-     * @param degrees   Mechanism degrees of rotation.
-     * @param gearRatio Gear ratio between CANCoder and mechanism.
-     * @return CANCoder position counts.
-     */
-    public static double degreesToCancoder(double degrees, double gearRatio) {
-        return degrees / (360.0 / (gearRatio * 4096.0));
-    }
-
     /**
      * @param counts    NEO position counts.
      * @param gearRatio Gear ratio between NEO and mechanism.
