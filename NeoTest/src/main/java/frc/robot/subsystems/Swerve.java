@@ -21,14 +21,14 @@ import static frc.robot.Constants.AutoConstants.*;
 import static frc.robot.Constants.SwerveK.*;
 
 public class Swerve extends SubsystemBase {
-  
-    private final SwerveModule flModule = new SwerveModule("FrontLeft", 0, SwerveK.kFLModConstants);
-	private final SwerveModule frModule = new SwerveModule("FrontRight", 1, SwerveK.kFRModConstants);
-	private final SwerveModule blModule = new SwerveModule("BackLeft", 2, SwerveK.kBLModConstants);
-	private final SwerveModule brModule = new SwerveModule("BackRight", 3, SwerveK.kBRModConstants);
+
+	private final SwerveModule flModule = new SwerveModule("FrontLeft", 0, SwerveK.FL_CONSTANTS);
+	private final SwerveModule frModule = new SwerveModule("FrontRight", 1, SwerveK.FR_CONSTANTS);
+	private final SwerveModule blModule = new SwerveModule("BackLeft", 2, SwerveK.BL_CONSTANTS);
+	private final SwerveModule brModule = new SwerveModule("BackRight", 3, SwerveK.BR_CONSTANTS);
 
 	private final SwerveModule[] m_modules = new SwerveModule[] {
-		flModule, frModule, blModule, brModule
+			flModule, frModule, blModule, brModule
 	};
 
 	private final Pigeon2 m_pigeon = new Pigeon2(Constants.SwerveK.PIGEON_CAN_ID);
@@ -149,14 +149,13 @@ public class Swerve extends SubsystemBase {
 		return runOnce(this::zeroGyro);
 	}
 
-
-    public void periodic() {
-        m_periodicCallCount++;
+	public void periodic() {
+		m_periodicCallCount++;
 		updatePigeonGyroRate();
 
 		for (var module : m_modules) {
 			module.periodic();
 		}
 
-    }
+	}
 }

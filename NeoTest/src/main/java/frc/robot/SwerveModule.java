@@ -1,12 +1,10 @@
 package frc.robot;
 
-import static frc.robot.Constants.SwerveK.ANGLE_GEAR_RATIO;
 import static frc.robot.Constants.SwerveK.ANGLE_IDLE_MODE;
 import static frc.robot.Constants.SwerveK.DRIVE_GEAR_RATIO;
 import static frc.robot.Constants.SwerveK.DRIVE_IDLE_MODE;
-import static frc.robot.Constants.SwerveK.DRIVE_MOTOR_INVERTED;
 import static frc.robot.Constants.SwerveK.MAX_VELOCITY;
-import static frc.robot.Constants.SwerveK.kWheelCircumference;
+import static frc.robot.Constants.SwerveK.WHEEL_CIRCUMFERENCE;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
@@ -34,7 +32,6 @@ public class SwerveModule {
     private CANSparkMax m_driveMotor;
     private SparkMaxAbsoluteEncoder m_angleEncoder;
     private SparkMaxPIDController m_angleController;
-    private Rotation2d m_lastAngle;
 
     public SwerveModule(String name, int number, SwerveModuleConstants constants) {
         MODULE_NAME = name;
@@ -47,33 +44,31 @@ public class SwerveModule {
         m_angleMotor.setClosedLoopRampRate(0.05);
         m_angleMotor.setInverted(false);
         m_angleMotor.setIdleMode(ANGLE_IDLE_MODE);
-        m_angleMotor.setSmartCurrentLimit(35);                      
+        m_angleMotor.setSmartCurrentLimit(35);
 
         m_angleEncoder = m_angleMotor.getAbsoluteEncoder(Type.kDutyCycle);
-        
-        m_angleEncoder.setPositionConversionFactor(SwerveK.kAngleEncPosFactor);
-        m_angleEncoder.setVelocityConversionFactor(SwerveK.kAngleEncVeloFactor);
+
+        m_angleEncoder.setPositionConversionFactor(SwerveK.ANGLE_ENC_POS_FACTOR);
+        m_angleEncoder.setVelocityConversionFactor(SwerveK.ANGLE_ENC_VELO_FACTOR);
 
         m_angleController = m_angleMotor.getPIDController();
         m_angleController.setFeedbackDevice(m_angleEncoder);
         m_angleController.setPositionPIDWrappingEnabled(true);
-        m_angleController.setPositionPIDWrappingMinInput(SwerveK.kAngleEncPosPIDMinInput);
-        m_angleController.setPositionPIDWrappingMaxInput(SwerveK.kAngleEncPosPIDMaxInput);
+        m_angleController.setPositionPIDWrappingMinInput(SwerveK.ANGLE_ENC_POS_PID_MIN_INPUT);
+        m_angleController.setPositionPIDWrappingMaxInput(SwerveK.ANGLE_ENC_POS_PID_MAX_INPUT);
         m_angleController.setOutputRange(-1.0, 1.0);
-       
+
         m_angleEncoder.setZeroOffset(0.0);
 
         m_angleController.setP(1);
         m_angleController.setI(0);
         m_angleController.setD(0);
         m_angleController.setFF(0);
-     
+
         m_angleController.setReference(m_angleEncoder.getPosition(), ControlType.kPosition);
 
         m_driveMotor = new CANSparkMax(constants.DRIVE_MOTOR_ID, MotorType.kBrushless);
         configDriveMotor();
-
-        m_lastAngle = getState().angle;
     }
 
     public void periodic() {
@@ -93,10 +88,10 @@ public class SwerveModule {
         SwerveModuleState correctedDesiredState = new SwerveModuleState();
         correctedDesiredState.speedMetersPerSecond = desiredState.speedMetersPerSecond;
         correctedDesiredState.angle = desiredState.angle.plus(m_constants.chassisAngularOffset);
-        
+
         // Optimize the reference state to avoid spinning further than 90 degrees.
         SwerveModuleState optimizedDesiredState = SwerveModuleState.optimize(correctedDesiredState,
-            new Rotation2d(m_angleEncoder.getPosition()));
+                new Rotation2d(m_angleEncoder.getPosition()));
         setAngle(optimizedDesiredState, steerInPlace);
         setSpeed(optimizedDesiredState, isOpenLoop);
     }
@@ -113,23 +108,17 @@ public class SwerveModule {
 
     private void setAngle(SwerveModuleState desiredState, boolean steerInPlace) {
         // // Prevent rotating module if speed is less then 1%. Prevents Jittering.
-        // Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (MAX_VELOCITY * 0.01)) ? m_lastAngle
-        //         : desiredState.angle;
+        // Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <=
+        // (MAX_VELOCITY * 0.01)) ? m_lastAngle
+        // : desiredState.angle;
 
         // if (!steerInPlace && Math.abs(desiredState.speedMetersPerSecond) < 0.01) {
-        //     angle = m_lastAngle;
+        // angle = m_lastAngle;
         // }
 
         // m_lastAngle = angle;
         SmartDashboard.putNumber(MODULE_NAME + " setpoint radians", desiredState.angle.getRadians());
         m_angleController.setReference(desiredState.angle.getRadians(), ControlType.kPosition);
-    }
-
-    private Rotation2d getMotorAngle() {
-        return Rotation2d.fromDegrees(
-                Conversions.neoToDegrees(
-                        m_angleMotor.getEncoder().getPosition(),
-                        ANGLE_GEAR_RATIO));
     }
 
     private Rotation2d getAbsAngle() {
@@ -169,14 +158,14 @@ public class SwerveModule {
 
     public SwerveModuleState getState() {
         return new SwerveModuleState(
-            Conversions.neoToMps(m_driveMotor.getEncoder().getVelocity(), MAX_VELOCITY),
-            getAbsAngle().minus(m_constants.chassisAngularOffset));
-        }
+                Conversions.neoToMps(m_driveMotor.getEncoder().getVelocity(), MAX_VELOCITY),
+                getAbsAngle().minus(m_constants.chassisAngularOffset));
+    }
 
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
-            Conversions.neoToMeters(m_driveMotor.getEncoder().getPosition(), kWheelCircumference,
-                DRIVE_GEAR_RATIO),
+                Conversions.neoToMeters(m_driveMotor.getEncoder().getPosition(), WHEEL_CIRCUMFERENCE,
+                        DRIVE_GEAR_RATIO),
                 getAbsAngle().minus(m_constants.chassisAngularOffset));
     }
 }

@@ -21,8 +21,8 @@ import static frc.robot.Constants.SwerveConstants.*;
 public class Swerve extends SubsystemBase {
 	private final SwerveModule flModule = new SwerveModule("FrontLeft", 0, Mod0.CONSTANTS);
 	private final SwerveModule frModule = new SwerveModule("FrontRight", 1, Mod1.CONSTANTS);
-	private final SwerveModule rlModule = new SwerveModule("RearLeft", 2, Mod2.kConstants);
-	private final SwerveModule rrModule = new SwerveModule("RearRight", 3, Mod3.kConstants);
+	private final SwerveModule rlModule = new SwerveModule("RearLeft", 2, Mod2.CONSTANTS);
+	private final SwerveModule rrModule = new SwerveModule("RearRight", 3, Mod3.CONSTANTS);
 
 	private final SwerveModule[] m_modules = new SwerveModule[] {
 			flModule, frModule, rlModule, rrModule

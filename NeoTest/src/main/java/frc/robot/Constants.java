@@ -16,11 +16,15 @@ import frc.lib.util.SwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
+ * The Constants class provides a convenient place for teams to hold robot-wide
+ * numerical or boolean
+ * constants. This class should not be used for any other purpose. All constants
+ * should be declared
  * globally (i.e. public static). Do not put anything functional in this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
+ * <p>
+ * It is advised to statically import this class (or one of its inner classes)
+ * wherever the
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
@@ -46,35 +50,35 @@ public final class Constants {
 				.SDSMK4i(SwerveConstants.driveGearRatios.SDSMK4i_L2);
 
 		// TODO: check these values
-		public static final double kTrackWidth = Units.inchesToMeters(24.75);
-		public static final double kWheelBase = Units.inchesToMeters(20.625);
-		public static final double kWheelCircumference = SWERVE_MODULE.WHEEL_CIRCUMFERENCE;
+		public static final double TRACK_WIDTH = Units.inchesToMeters(24.75);
+		public static final double WHEEL_BASE = Units.inchesToMeters(20.625);
+		public static final double WHEEL_CIRCUMFERENCE = SWERVE_MODULE.WHEEL_CIRCUMFERENCE;
 
 		public static final Translation2d[] MODULE_TRANSLATIONS = {
-				new Translation2d(kWheelBase / 2.0, kTrackWidth / 2.0),
-				new Translation2d(kWheelBase / 2.0, -kTrackWidth / 2.0),
-				new Translation2d(-kWheelBase / 2.0, kTrackWidth / 2.0),
-				new Translation2d(-kWheelBase / 2.0, -kTrackWidth / 2.0)
+				new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
+				new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
+				new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
+				new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0)
 		};
 
-		public static final Rotation2d kFrontLeftChassisAngularOffset =  Rotation2d.fromRadians(-Math.PI / 2);
-		public static final Rotation2d kFrontRightChassisAngularOffset = Rotation2d.fromRadians(0);
-		public static final Rotation2d kBackLeftChassisAngularOffset =   Rotation2d.fromRadians(Math.PI);
-		public static final Rotation2d kBackRightChassisAngularOffset =  Rotation2d.fromRadians(Math.PI / 2);
+		public static final Rotation2d FL_ANGULAR_OFFSET = Rotation2d.fromRadians(-Math.PI / 2);
+		public static final Rotation2d FR_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
+		public static final Rotation2d BL_ANGULAR_OFFSET = Rotation2d.fromRadians(Math.PI);
+		public static final Rotation2d BR_ANGULAR_OFFSET = Rotation2d.fromRadians(Math.PI / 2);
 
 		public static final SwerveDriveKinematics KINEMATICS = new SwerveDriveKinematics(MODULE_TRANSLATIONS);
 
 		public static final double DRIVE_GEAR_RATIO = SWERVE_MODULE.DRIVE_GEAR_RATIO;
 		public static final double ANGLE_GEAR_RATIO = SWERVE_MODULE.ANGLE_GEAR_RATIO;
 
-		public static final boolean ANGLE_MOTOR_INVERTED = false; //SWERVE_MODULE.ANGLE_MOTOR_INVERTED;
-		public static final boolean DRIVE_MOTOR_INVERTED =  false; //SWERVE_MODULE.DRIVE_MOTOR_INVERTED;
+		public static final boolean ANGLE_MOTOR_INVERTED = false; // SWERVE_MODULE.ANGLE_MOTOR_INVERTED;
+		public static final boolean DRIVE_MOTOR_INVERTED = false; // SWERVE_MODULE.DRIVE_MOTOR_INVERTED;
 
-		public static final double kAngleEncPosFactor = (2 * Math.PI); // radians
-		public static final double kAngleEncVeloFactor = (2 * Math.PI) / 60.0; // radians per second
+		public static final double ANGLE_ENC_POS_FACTOR = (2 * Math.PI); // radians
+		public static final double ANGLE_ENC_VELO_FACTOR = (2 * Math.PI) / 60.0; // radians per second
 
-		public static final double kAngleEncPosPIDMinInput = 0; // radians
-		public static final double kAngleEncPosPIDMaxInput = kAngleEncPosFactor; // radians
+		public static final double ANGLE_ENC_POS_PID_MIN_INPUT = 0; // radians
+		public static final double ANGLE_ENC_POS_PID_MAX_INPUT = ANGLE_ENC_POS_FACTOR; // radians
 
 		public static final int ANGLE_CONTINUOUS_CURRENT_LIMIT = 25;
 		public static final int ANGLE_PEAK_CURRENT_LIMIT = 40;
@@ -109,14 +113,14 @@ public final class Constants {
 		public static final double DRIVE_KA = 0.27 / 12;
 
 		public static final SimpleMotorFeedforward DRIVE_FF = new SimpleMotorFeedforward( // real
-			DRIVE_KS, // Voltage to break static friction
-			DRIVE_KV, // Volts per meter per second
-			DRIVE_KA // Volts per meter per second squared
+				DRIVE_KS, // Voltage to break static friction
+				DRIVE_KV, // Volts per meter per second
+				DRIVE_KA // Volts per meter per second squared
 		);
 		public static final SimpleMotorFeedforward ANGLE_FF = new SimpleMotorFeedforward( // real
-			0.5, // Voltage to break static friction
-			0.23, // Volts per radian per second
-			0.0056 // Volts per radian per second squared
+				0.5, // Voltage to break static friction
+				0.23, // Volts per radian per second
+				0.0056 // Volts per radian per second squared
 		);
 
 		public static final double MAX_VELOCITY = 5.0; // m/s
@@ -126,20 +130,20 @@ public final class Constants {
 		public static final IdleMode DRIVE_IDLE_MODE = IdleMode.kBrake;
 
 		/* Front left module */
-		public static final SwerveModuleConstants kFLModConstants = new SwerveModuleConstants(
-			1, 2, kFrontLeftChassisAngularOffset, false);
+		public static final SwerveModuleConstants FL_CONSTANTS = new SwerveModuleConstants(
+				1, 2, FL_ANGULAR_OFFSET, false);
 
 		/* Front right module */
-		public static final SwerveModuleConstants kFRModConstants = new SwerveModuleConstants(
-			3, 4, kFrontRightChassisAngularOffset, false);
+		public static final SwerveModuleConstants FR_CONSTANTS = new SwerveModuleConstants(
+				3, 4, FR_ANGULAR_OFFSET, false);
 
 		/* Back left module */
-		public static final SwerveModuleConstants kBLModConstants = new SwerveModuleConstants(
-			5, 6, kBackLeftChassisAngularOffset, false);
+		public static final SwerveModuleConstants BL_CONSTANTS = new SwerveModuleConstants(
+				5, 6, BL_ANGULAR_OFFSET, false);
 
 		/* Back right module */
-		public static final SwerveModuleConstants kBRModConstants = new SwerveModuleConstants(
-			7, 8, kBackRightChassisAngularOffset, false);
+		public static final SwerveModuleConstants BR_CONSTANTS = new SwerveModuleConstants(
+				7, 8, BR_ANGULAR_OFFSET, false);
 	}
 
 	public static final class AutoConstants {
@@ -150,7 +154,7 @@ public final class Constants {
 		public static final double DTHETA_CONTROLLER = 0.5;
 	}
 
-  public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-  }
+	public static class OperatorConstants {
+		public static final int DRIVER_PORT = 0;
+	}
 }
