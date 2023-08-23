@@ -15,18 +15,20 @@ import edu.wpi.first.wpilibj2.command.*;
 import com.ctre.phoenix.sensors.Pigeon2;
 
 import frc.robot.SwerveModule;
+import frc.robot.Constants.SwerveK;
 import frc.robot.Constants;
 import static frc.robot.Constants.AutoConstants.*;
 import static frc.robot.Constants.SwerveK.*;
 
 public class Swerve extends SubsystemBase {
   
-    // private final SwerveModule flModule = new SwerveModule("FrontLeft", 0, Mod0.CONSTANTS);
-	private final SwerveModule frModule = new SwerveModule("FrontRight", 1, Mod1.CONSTANTS);
+    private final SwerveModule flModule = new SwerveModule("FrontLeft", 0, SwerveK.kFLModConstants);
+	private final SwerveModule frModule = new SwerveModule("FrontRight", 1, SwerveK.kFRModConstants);
+	private final SwerveModule blModule = new SwerveModule("BackLeft", 2, SwerveK.kBLModConstants);
+	private final SwerveModule brModule = new SwerveModule("BackRight", 3, SwerveK.kBRModConstants);
 
 	private final SwerveModule[] m_modules = new SwerveModule[] {
-		// flModule,
-		frModule
+		flModule, frModule, blModule, brModule
 	};
 
 	private final Pigeon2 m_pigeon = new Pigeon2(Constants.SwerveK.PIGEON_CAN_ID);
