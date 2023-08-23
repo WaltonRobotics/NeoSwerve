@@ -46,24 +46,29 @@ public final class Constants {
 				.SDSMK4i(SwerveConstants.driveGearRatios.SDSMK4i_L2);
 
 		// TODO: check these values
-		public static final double TRACK_WIDTH = Units.inchesToMeters(24.75);
-		public static final double WHEEL_BASE = Units.inchesToMeters(20.625);
-		public static final double WHEEL_CIRCUMFERENCE = SWERVE_MODULE.WHEEL_CIRCUMFERENCE;
+		public static final double kTrackWidth = Units.inchesToMeters(24.75);
+		public static final double kWheelBase = Units.inchesToMeters(20.625);
+		public static final double kWheelCircumference = SWERVE_MODULE.WHEEL_CIRCUMFERENCE;
 
 		public static final Translation2d[] MODULE_TRANSLATIONS = {
-				new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
-				new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
-				new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
-				new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0)
+				new Translation2d(kWheelBase / 2.0, kTrackWidth / 2.0),
+				new Translation2d(kWheelBase / 2.0, -kTrackWidth / 2.0),
+				new Translation2d(-kWheelBase / 2.0, kTrackWidth / 2.0),
+				new Translation2d(-kWheelBase / 2.0, -kTrackWidth / 2.0)
 		};
+
+		public static final Rotation2d kFrontLeftChassisAngularOffset =  Rotation2d.fromRadians(-Math.PI / 2);
+		public static final Rotation2d kFrontRightChassisAngularOffset = Rotation2d.fromRadians(0);
+		public static final Rotation2d kBackLeftChassisAngularOffset =   Rotation2d.fromRadians(Math.PI);
+		public static final Rotation2d kBackRightChassisAngularOffset =  Rotation2d.fromRadians(Math.PI / 2);
 
 		public static final SwerveDriveKinematics KINEMATICS = new SwerveDriveKinematics(MODULE_TRANSLATIONS);
 
 		public static final double DRIVE_GEAR_RATIO = SWERVE_MODULE.DRIVE_GEAR_RATIO;
 		public static final double ANGLE_GEAR_RATIO = SWERVE_MODULE.ANGLE_GEAR_RATIO;
 
-		public static final boolean ANGLE_MOTOR_INVERTED = SWERVE_MODULE.ANGLE_MOTOR_INVERTED;
-		public static final boolean DRIVE_MOTOR_INVERTED = SWERVE_MODULE.DRIVE_MOTOR_INVERTED;
+		public static final boolean ANGLE_MOTOR_INVERTED = false; //SWERVE_MODULE.ANGLE_MOTOR_INVERTED;
+		public static final boolean DRIVE_MOTOR_INVERTED =  false; //SWERVE_MODULE.DRIVE_MOTOR_INVERTED;
 
 		public static final double kAngleEncPosFactor = (2 * Math.PI); // radians
 		public static final double kAngleEncVeloFactor = (2 * Math.PI) / 60.0; // radians per second
@@ -94,7 +99,7 @@ public final class Constants {
 		public static final double ANGLE_KD = SWERVE_MODULE.ANGLE_KD;
 		public static final double ANGLE_KF = SWERVE_MODULE.ANGLE_KF;
 
-		public static final double DRIVE_KP = 0.05;
+		public static final double DRIVE_KP = 0.5;
 		public static final double DRIVE_KI = 0.0;
 		public static final double DRIVE_KD = 0.0;
 		public static final double DRIVE_KF = 0.0;
@@ -104,14 +109,14 @@ public final class Constants {
 		public static final double DRIVE_KA = 0.27 / 12;
 
 		public static final SimpleMotorFeedforward DRIVE_FF = new SimpleMotorFeedforward( // real
-				DRIVE_KS, // Voltage to break static friction
-				DRIVE_KV, // Volts per meter per second
-				DRIVE_KA // Volts per meter per second squared
+			DRIVE_KS, // Voltage to break static friction
+			DRIVE_KV, // Volts per meter per second
+			DRIVE_KA // Volts per meter per second squared
 		);
 		public static final SimpleMotorFeedforward ANGLE_FF = new SimpleMotorFeedforward( // real
-				0.5, // Voltage to break static friction
-				0.23, // Volts per radian per second
-				0.0056 // Volts per radian per second squared
+			0.5, // Voltage to break static friction
+			0.23, // Volts per radian per second
+			0.0056 // Volts per radian per second squared
 		);
 
 		public static final double MAX_VELOCITY = 5.0; // m/s
@@ -122,19 +127,19 @@ public final class Constants {
 
 		/* Front left module */
 		public static final SwerveModuleConstants kFLModConstants = new SwerveModuleConstants(
-			1, 2, Rotation2d.fromRadians(Math.PI / 2), false);
+			1, 2, kFrontLeftChassisAngularOffset, false);
 
 		/* Front right module */
 		public static final SwerveModuleConstants kFRModConstants = new SwerveModuleConstants(
-			3, 4, Rotation2d.fromRadians(Math.PI / 2), false);
-		
+			3, 4, kFrontRightChassisAngularOffset, false);
+
 		/* Back left module */
 		public static final SwerveModuleConstants kBLModConstants = new SwerveModuleConstants(
-			5, 6, Rotation2d.fromRadians(Math.PI / 2), false);
+			5, 6, kBackLeftChassisAngularOffset, false);
 
 		/* Back right module */
 		public static final SwerveModuleConstants kBRModConstants = new SwerveModuleConstants(
-			7, 8, Rotation2d.fromRadians(Math.PI / 2), false);
+			7, 8, kBackRightChassisAngularOffset, false);
 	}
 
 	public static final class AutoConstants {

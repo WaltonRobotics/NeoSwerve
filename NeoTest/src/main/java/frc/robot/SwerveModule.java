@@ -6,7 +6,7 @@ import static frc.robot.Constants.SwerveK.DRIVE_GEAR_RATIO;
 import static frc.robot.Constants.SwerveK.DRIVE_IDLE_MODE;
 import static frc.robot.Constants.SwerveK.DRIVE_MOTOR_INVERTED;
 import static frc.robot.Constants.SwerveK.MAX_VELOCITY;
-import static frc.robot.Constants.SwerveK.WHEEL_CIRCUMFERENCE;
+import static frc.robot.Constants.SwerveK.kWheelCircumference;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
@@ -175,7 +175,7 @@ public class SwerveModule {
 
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
-            Conversions.neoToMeters(m_driveMotor.getEncoder().getPosition(), WHEEL_CIRCUMFERENCE,
+            Conversions.neoToMeters(m_driveMotor.getEncoder().getPosition(), kWheelCircumference,
                 DRIVE_GEAR_RATIO),
                 getAbsAngle().minus(m_constants.chassisAngularOffset));
     }
