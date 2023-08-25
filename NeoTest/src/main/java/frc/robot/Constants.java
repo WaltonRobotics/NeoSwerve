@@ -55,16 +55,21 @@ public final class Constants {
 		public static final double WHEEL_CIRCUMFERENCE = SWERVE_MODULE.WHEEL_CIRCUMFERENCE;
 
 		public static final Translation2d[] MODULE_TRANSLATIONS = {
-				new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
-				new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
 				new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
-				new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0)
+				new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
+				new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
+				new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0)
 		};
 
-		public static final Rotation2d FL_ANGULAR_OFFSET = Rotation2d.fromRadians(-Math.PI / 2);
+		// public static final Rotation2d FL_ANGULAR_OFFSET = Rotation2d.fromRadians(-Math.PI / 2);
+		// public static final Rotation2d FR_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
+		// public static final Rotation2d BL_ANGULAR_OFFSET = Rotation2d.fromRadians(Math.PI);
+		// public static final Rotation2d BR_ANGULAR_OFFSET = Rotation2d.fromRadians(Math.PI / 2);
+
+		public static final Rotation2d FL_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
 		public static final Rotation2d FR_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
-		public static final Rotation2d BL_ANGULAR_OFFSET = Rotation2d.fromRadians(Math.PI);
-		public static final Rotation2d BR_ANGULAR_OFFSET = Rotation2d.fromRadians(Math.PI / 2);
+		public static final Rotation2d BL_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
+		public static final Rotation2d BR_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
 
 		public static final SwerveDriveKinematics KINEMATICS = new SwerveDriveKinematics(MODULE_TRANSLATIONS);
 

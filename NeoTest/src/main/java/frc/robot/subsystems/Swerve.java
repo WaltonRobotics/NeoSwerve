@@ -23,12 +23,12 @@ import static frc.robot.Constants.SwerveK.*;
 public class Swerve extends SubsystemBase {
 
 	private final SwerveModule flModule = new SwerveModule("FrontLeft", 0, SwerveK.FL_CONSTANTS);
-	private final SwerveModule frModule = new SwerveModule("FrontRight", 1, SwerveK.FR_CONSTANTS);
-	private final SwerveModule blModule = new SwerveModule("BackLeft", 2, SwerveK.BL_CONSTANTS);
-	private final SwerveModule brModule = new SwerveModule("BackRight", 3, SwerveK.BR_CONSTANTS);
+	private final SwerveModule frModule = new SwerveModule("FrontRight", 3, SwerveK.FR_CONSTANTS);
+	private final SwerveModule brModule = new SwerveModule("BackRight", 2, SwerveK.BR_CONSTANTS);
+	private final SwerveModule blModule = new SwerveModule("BackLeft", 1, SwerveK.BL_CONSTANTS);
 
 	private final SwerveModule[] m_modules = new SwerveModule[] {
-			flModule, frModule, blModule, brModule
+			flModule, blModule, brModule, frModule
 	};
 
 	private final Pigeon2 m_pigeon = new Pigeon2(Constants.SwerveK.PIGEON_CAN_ID);
