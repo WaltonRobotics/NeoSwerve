@@ -56,9 +56,9 @@ public final class Constants {
 
 		public static final Translation2d[] MODULE_TRANSLATIONS = {
 				new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
-				new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
+				new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
 				new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
-				new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0)
+				new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0)
 		};
 
 		// public static final Rotation2d FL_ANGULAR_OFFSET = Rotation2d.fromRadians(-Math.PI / 2);

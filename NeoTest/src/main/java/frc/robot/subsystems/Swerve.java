@@ -10,6 +10,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 
 import com.ctre.phoenix.sensors.Pigeon2;
@@ -22,13 +23,13 @@ import static frc.robot.Constants.SwerveK.*;
 
 public class Swerve extends SubsystemBase {
 
-	private final SwerveModule flModule = new SwerveModule("FrontLeft", 0, SwerveK.FL_CONSTANTS);
-	private final SwerveModule frModule = new SwerveModule("FrontRight", 3, SwerveK.FR_CONSTANTS);
-	private final SwerveModule brModule = new SwerveModule("BackRight", 2, SwerveK.BR_CONSTANTS);
-	private final SwerveModule blModule = new SwerveModule("BackLeft", 1, SwerveK.BL_CONSTANTS);
+	private final SwerveModule frModule = new SwerveModule("FrontRight", 0, SwerveK.FR_CONSTANTS);
+	private final SwerveModule flModule = new SwerveModule("FrontLeft", 1, SwerveK.FL_CONSTANTS);
+	private final SwerveModule blModule = new SwerveModule("BackLeft", 2, SwerveK.BL_CONSTANTS);
+	private final SwerveModule brModule = new SwerveModule("BackRight", 3, SwerveK.BR_CONSTANTS);
 
 	private final SwerveModule[] m_modules = new SwerveModule[] {
-			flModule, blModule, brModule, frModule
+			frModule, flModule, blModule, brModule
 	};
 
 	private final Pigeon2 m_pigeon = new Pigeon2(Constants.SwerveK.PIGEON_CAN_ID);
@@ -150,12 +151,15 @@ public class Swerve extends SubsystemBase {
 	}
 
 	public void periodic() {
+
 		m_periodicCallCount++;
 		updatePigeonGyroRate();
 
 		for (var module : m_modules) {
 			module.periodic();
 		}
+
+		SmartDashboard.putNumber("heading", getHeading().getDegrees());
 
 	}
 }
