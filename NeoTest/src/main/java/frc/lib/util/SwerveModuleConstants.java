@@ -6,7 +6,6 @@ public class SwerveModuleConstants {
     public final int DRIVE_MOTOR_ID;
     public final boolean driveInverted;
     public final int ANGLE_MOTOR_ID;
-    public final Rotation2d chassisAngularOffset;
     public final String CANBUS;
 
     /**
@@ -15,13 +14,11 @@ public class SwerveModuleConstants {
      * @param driveMotorId
      * @param angleMotorId
      * @param cancoderId
-     * @param angleOffset
      */
-    public SwerveModuleConstants(int driveMotorId, int angleMotorId, Rotation2d angleOffset,
+    public SwerveModuleConstants(int driveMotorId, int angleMotorId,
         boolean invertDrive) {
         DRIVE_MOTOR_ID = driveMotorId;
         ANGLE_MOTOR_ID = angleMotorId;
-        chassisAngularOffset = angleOffset;
         driveInverted = invertDrive;
         CANBUS = "";
     }
@@ -35,11 +32,10 @@ public class SwerveModuleConstants {
      * @param angleOffset
      * @param canbus
      */
-    public SwerveModuleConstants(int driveMotorId, int angleMotorId, Rotation2d angleOffset,
+    public SwerveModuleConstants(int driveMotorId, int angleMotorId,
             boolean invertDrive, String canbus) {
         DRIVE_MOTOR_ID = driveMotorId;
         ANGLE_MOTOR_ID = angleMotorId;
-        chassisAngularOffset = angleOffset;
         driveInverted = invertDrive;
         CANBUS = canbus;
     }

@@ -63,16 +63,6 @@ public final class Constants {
 			FL_MODULE_TX2D, FR_MODULE_TX2D, BL_MODULE_TX2D, BR_MODULE_TX2D
 		};
 
-		// public static final Rotation2d FL_ANGULAR_OFFSET = Rotation2d.fromRadians(-Math.PI / 2);
-		// public static final Rotation2d FR_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
-		// public static final Rotation2d BL_ANGULAR_OFFSET = Rotation2d.fromRadians(Math.PI);
-		// public static final Rotation2d BR_ANGULAR_OFFSET = Rotation2d.fromRadians(Math.PI / 2);
-
-		public static final Rotation2d FL_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
-		public static final Rotation2d FR_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
-		public static final Rotation2d BL_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
-		public static final Rotation2d BR_ANGULAR_OFFSET = Rotation2d.fromRadians(0);
-
 		public static final SwerveDriveKinematics KINEMATICS = new SwerveDriveKinematics(MODULE_TRANSLATIONS);
 
 		public static final double DRIVE_GEAR_RATIO = SWERVE_MODULE.DRIVE_GEAR_RATIO;
@@ -138,19 +128,19 @@ public final class Constants {
 
 		/* Front left module */
 		public static final SwerveModuleConstants FL_CONSTANTS = new SwerveModuleConstants(
-				1, 2, FL_ANGULAR_OFFSET, false);
+				1, 2, false);
 
 		/* Front right module */
 		public static final SwerveModuleConstants FR_CONSTANTS = new SwerveModuleConstants(
-				3, 4, FR_ANGULAR_OFFSET, false);
+				3, 4, false);
 
 		/* Back left module */
 		public static final SwerveModuleConstants BL_CONSTANTS = new SwerveModuleConstants(
-				5, 6, BL_ANGULAR_OFFSET, false);
+				5, 6, false);
 
 		/* Back right module */
 		public static final SwerveModuleConstants BR_CONSTANTS = new SwerveModuleConstants(
-				7, 8, BR_ANGULAR_OFFSET, false);
+				7, 8, false);
 	}
 
 	public static final class AutoConstants {

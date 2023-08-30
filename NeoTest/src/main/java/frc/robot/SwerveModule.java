@@ -85,12 +85,8 @@ public class SwerveModule {
      *                     velocity is 0.
      */
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop, boolean steerInPlace) {
-        SwerveModuleState correctedDesiredState = new SwerveModuleState();
-        correctedDesiredState.speedMetersPerSecond = desiredState.speedMetersPerSecond;
-        correctedDesiredState.angle = desiredState.angle.plus(m_constants.chassisAngularOffset);
-
         // Optimize the reference state to avoid spinning further than 90 degrees.
-        SwerveModuleState optimizedDesiredState = SwerveModuleState.optimize(correctedDesiredState,
+        SwerveModuleState optimizedDesiredState = SwerveModuleState.optimize(desiredState,
                 new Rotation2d(m_angleEncoder.getPosition()));
         setAngle(optimizedDesiredState, steerInPlace);
         setSpeed(optimizedDesiredState, isOpenLoop);
@@ -158,14 +154,18 @@ public class SwerveModule {
 
     public SwerveModuleState getState() {
         return new SwerveModuleState(
-                Conversions.neoToMps(m_driveMotor.getEncoder().getVelocity(), MAX_VELOCITY),
-                getAbsAngle().minus(m_constants.chassisAngularOffset));
+            Conversions.neoToMps(
+                m_driveMotor.getEncoder().getVelocity(),
+                MAX_VELOCITY),
+            getAbsAngle());
     }
 
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
-                Conversions.neoToMeters(m_driveMotor.getEncoder().getPosition(), WHEEL_CIRCUMFERENCE,
-                        DRIVE_GEAR_RATIO),
-                getAbsAngle().minus(m_constants.chassisAngularOffset));
+            Conversions.neoToMeters(
+                m_driveMotor.getEncoder().getPosition(),
+                WHEEL_CIRCUMFERENCE,
+                DRIVE_GEAR_RATIO),
+            getAbsAngle());
     }
 }
