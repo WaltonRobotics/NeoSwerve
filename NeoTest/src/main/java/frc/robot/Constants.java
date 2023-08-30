@@ -52,13 +52,15 @@ public final class Constants {
 		// TODO: check these values
 		public static final double TRACK_WIDTH = Units.inchesToMeters(24.75);
 		public static final double WHEEL_BASE = Units.inchesToMeters(20.625);
-		public static final double WHEEL_CIRCUMFERENCE = SWERVE_MODULE.WHEEL_CIRCUMFERENCE;
+		public static final double WHEEL_CIRCUMFERENCE = Units.inchesToMeters(3.9);
+
+		public static final Translation2d FL_MODULE_TX2D = new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0);
+		public static final Translation2d FR_MODULE_TX2D = new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0);
+		public static final Translation2d BL_MODULE_TX2D = new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0);
+		public static final Translation2d BR_MODULE_TX2D = new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0);
 
 		public static final Translation2d[] MODULE_TRANSLATIONS = {
-				new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
-				new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
-				new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
-				new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0)
+			FL_MODULE_TX2D, FR_MODULE_TX2D, BL_MODULE_TX2D, BR_MODULE_TX2D
 		};
 
 		// public static final Rotation2d FL_ANGULAR_OFFSET = Rotation2d.fromRadians(-Math.PI / 2);
