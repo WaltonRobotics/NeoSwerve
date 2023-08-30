@@ -1,8 +1,7 @@
 package frc.lib.util;
 
-import edu.wpi.first.math.geometry.Rotation2d;
-
 public class SwerveModuleConstants {
+    public final int MODULE_ID;
     public final int DRIVE_MOTOR_ID;
     public final boolean driveInverted;
     public final int ANGLE_MOTOR_ID;
@@ -15,12 +14,13 @@ public class SwerveModuleConstants {
      * @param angleMotorId
      * @param cancoderId
      */
-    public SwerveModuleConstants(int driveMotorId, int angleMotorId,
-        boolean invertDrive) {
-        DRIVE_MOTOR_ID = driveMotorId;
-        ANGLE_MOTOR_ID = angleMotorId;
-        driveInverted = invertDrive;
-        CANBUS = "";
+    public SwerveModuleConstants(
+        int moduleId,
+        int driveMotorId,
+        int angleMotorId,
+        boolean invertDrive
+    ) {
+        this(moduleId, driveMotorId, angleMotorId, invertDrive, "");
     }
 
     /**
@@ -32,8 +32,14 @@ public class SwerveModuleConstants {
      * @param angleOffset
      * @param canbus
      */
-    public SwerveModuleConstants(int driveMotorId, int angleMotorId,
-            boolean invertDrive, String canbus) {
+    public SwerveModuleConstants(
+        int moduleId,
+        int driveMotorId,
+        int angleMotorId,
+        boolean invertDrive,
+        String canbus
+    ) {
+        MODULE_ID = moduleId;
         DRIVE_MOTOR_ID = driveMotorId;
         ANGLE_MOTOR_ID = angleMotorId;
         driveInverted = invertDrive;

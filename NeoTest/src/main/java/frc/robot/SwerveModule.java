@@ -27,15 +27,15 @@ public class SwerveModule {
     public final String MODULE_NAME;
     public final int MODULE_NUMBER;
 
-    private final SwerveModuleConstants m_constants;
+    public final SwerveModuleConstants m_constants;
     private CANSparkMax m_angleMotor;
     private CANSparkMax m_driveMotor;
     private SparkMaxAbsoluteEncoder m_angleEncoder;
     private SparkMaxPIDController m_angleController;
 
-    public SwerveModule(String name, int number, SwerveModuleConstants constants) {
+    public SwerveModule(String name, SwerveModuleConstants constants) {
         MODULE_NAME = name;
-        MODULE_NUMBER = number;
+        MODULE_NUMBER = constants.MODULE_ID;
         m_constants = constants;
 
         m_angleMotor = new CANSparkMax(constants.ANGLE_MOTOR_ID, MotorType.kBrushless);
@@ -50,6 +50,7 @@ public class SwerveModule {
 
         m_angleEncoder.setPositionConversionFactor(SwerveK.ANGLE_ENC_POS_FACTOR);
         m_angleEncoder.setVelocityConversionFactor(SwerveK.ANGLE_ENC_VELO_FACTOR);
+        m_angleEncoder.setInverted(false);
 
         m_angleController = m_angleMotor.getPIDController();
         m_angleController.setFeedbackDevice(m_angleEncoder);

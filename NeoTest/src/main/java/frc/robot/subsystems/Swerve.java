@@ -23,10 +23,10 @@ import static frc.robot.Constants.SwerveK.*;
 
 public class Swerve extends SubsystemBase {
 
-	private final SwerveModule flModule = new SwerveModule("FrontLeft", 1, SwerveK.FL_CONSTANTS);
-	private final SwerveModule frModule = new SwerveModule("FrontRight", 0, SwerveK.FR_CONSTANTS);
-	private final SwerveModule blModule = new SwerveModule("BackLeft", 2, SwerveK.BL_CONSTANTS);
-	private final SwerveModule brModule = new SwerveModule("BackRight", 3, SwerveK.BR_CONSTANTS);
+	private final SwerveModule flModule = new SwerveModule("FrontLeft", SwerveK.FL_CONSTANTS);
+	private final SwerveModule frModule = new SwerveModule("FrontRight", SwerveK.FR_CONSTANTS);
+	private final SwerveModule blModule = new SwerveModule("BackLeft", SwerveK.BL_CONSTANTS);
+	private final SwerveModule brModule = new SwerveModule("BackRight", SwerveK.BR_CONSTANTS);
 
 	private final SwerveModule[] m_modules = new SwerveModule[] {
 			flModule, frModule, blModule, brModule
@@ -85,16 +85,26 @@ public class Swerve extends SubsystemBase {
 	public void setModuleStates(SwerveModuleState[] desiredStates, boolean openLoop, boolean steerInPlace) {
 		SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, MAX_VELOCITY);
 
-		for (SwerveModule mod : m_modules) {
-			mod.setDesiredState(desiredStates[mod.MODULE_NUMBER], openLoop, steerInPlace);
+		for (int i = 0; i < 4; i++) {
+			m_modules[i].setDesiredState(desiredStates[i], openLoop, steerInPlace);
+			// System.out.println("Mod" + i + " angle: " + desiredStates[i].angle.getDegrees());
 		}
+
+		// for (SwerveModule mod : m_modules) {
+		// 	mod.setDesiredState(desiredStates[mod.MODULE_NUMBER], openLoop, steerInPlace);
+		// }
 	}
 
 	public SwerveModulePosition[] getModulePositions() {
 		SwerveModulePosition[] positions = new SwerveModulePosition[4];
-		for (SwerveModule mod : m_modules) {
-			positions[mod.MODULE_NUMBER] = mod.getPosition();
+
+		for (int i = 0; i < 4; i++) {
+			positions[i] = m_modules[i].getPosition();
 		}
+
+		// for (SwerveModule mod : m_modules) {
+			// positions[mod.MODULE_NUMBER] = mod.getPosition();
+		// }
 		return positions;
 	}
 

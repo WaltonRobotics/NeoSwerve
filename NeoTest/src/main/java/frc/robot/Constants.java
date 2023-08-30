@@ -50,8 +50,8 @@ public final class Constants {
 				.SDSMK4i(SwerveConstants.driveGearRatios.SDSMK4i_L2);
 
 		// TODO: check these values
-		public static final double TRACK_WIDTH = Units.inchesToMeters(24.75);
 		public static final double WHEEL_BASE = Units.inchesToMeters(20.625);
+		public static final double TRACK_WIDTH = Units.inchesToMeters(24.75);
 		public static final double WHEEL_CIRCUMFERENCE = Units.inchesToMeters(3.9);
 
 		public static final Translation2d FL_MODULE_TX2D = new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0);
@@ -128,19 +128,19 @@ public final class Constants {
 
 		/* Front left module */
 		public static final SwerveModuleConstants FL_CONSTANTS = new SwerveModuleConstants(
-				1, 2, false);
+			0, 1, 2, false);
 
 		/* Front right module */
 		public static final SwerveModuleConstants FR_CONSTANTS = new SwerveModuleConstants(
-				3, 4, false);
+			1, 3, 4, false);
 
 		/* Back left module */
 		public static final SwerveModuleConstants BL_CONSTANTS = new SwerveModuleConstants(
-				5, 6, false);
+			2, 5, 6, false);
 
 		/* Back right module */
 		public static final SwerveModuleConstants BR_CONSTANTS = new SwerveModuleConstants(
-				7, 8, false);
+			3, 7, 8, false);
 	}
 
 	public static final class AutoConstants {
