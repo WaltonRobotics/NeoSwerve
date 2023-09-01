@@ -29,7 +29,7 @@ public class Swerve extends SubsystemBase {
 	private final SwerveModule brModule = new SwerveModule("BackRight", SwerveK.BR_CONSTANTS);
 
 	private final SwerveModule[] m_modules = new SwerveModule[] {
-			flModule, frModule, blModule, brModule
+		flModule, frModule, blModule, brModule
 	};
 
 	private final Pigeon2 m_pigeon = new Pigeon2(Constants.SwerveK.PIGEON_CAN_ID);

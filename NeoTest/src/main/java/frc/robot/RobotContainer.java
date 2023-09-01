@@ -32,7 +32,7 @@ public class RobotContainer {
 				swerve.driveTeleop(
 						() -> driver.getLeftY(),
 						() -> -driver.getLeftX(),
-						() -> driver.getRightX()));
+						() -> -driver.getRightX()));
 	}
 
 	/**

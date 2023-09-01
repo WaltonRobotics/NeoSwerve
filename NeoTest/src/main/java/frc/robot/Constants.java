@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
@@ -54,10 +53,10 @@ public final class Constants {
 		public static final double TRACK_WIDTH = Units.inchesToMeters(24.75);
 		public static final double WHEEL_CIRCUMFERENCE = Units.inchesToMeters(3.9);
 
-		public static final Translation2d FL_MODULE_TX2D = new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0);
-		public static final Translation2d FR_MODULE_TX2D = new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0);
-		public static final Translation2d BL_MODULE_TX2D = new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0);
-		public static final Translation2d BR_MODULE_TX2D = new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0);
+		public static final Translation2d FL_MODULE_TX2D = new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0);
+		public static final Translation2d FR_MODULE_TX2D = new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0);
+		public static final Translation2d BL_MODULE_TX2D = new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0);
+		public static final Translation2d BR_MODULE_TX2D = new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0);
 
 		public static final Translation2d[] MODULE_TRANSLATIONS = {
 			FL_MODULE_TX2D, FR_MODULE_TX2D, BL_MODULE_TX2D, BR_MODULE_TX2D
