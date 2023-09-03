@@ -68,6 +68,7 @@ public final class Constants {
 		public static final double ANGLE_GEAR_RATIO = SWERVE_MODULE.ANGLE_GEAR_RATIO;
 
 		public static final boolean ANGLE_MOTOR_INVERTED = true; // SWERVE_MODULE.ANGLE_MOTOR_INVERTED;
+		public static final boolean ANGLE_ENC_INVERTED = true;
 		public static final boolean DRIVE_MOTOR_INVERTED = false; // SWERVE_MODULE.DRIVE_MOTOR_INVERTED;
 
 		public static final double ANGLE_ENC_POS_FACTOR = (2 * Math.PI); // radians

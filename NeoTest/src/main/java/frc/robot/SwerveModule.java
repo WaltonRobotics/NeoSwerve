@@ -42,7 +42,7 @@ public class SwerveModule {
         m_angleMotor.restoreFactoryDefaults();
         m_angleMotor.disableVoltageCompensation();
         m_angleMotor.setClosedLoopRampRate(0.05);
-        m_angleMotor.setInverted(false);
+        m_angleMotor.setInverted(SwerveK.ANGLE_MOTOR_INVERTED);
         m_angleMotor.setIdleMode(ANGLE_IDLE_MODE);
         m_angleMotor.setSmartCurrentLimit(35);
 
@@ -50,7 +50,7 @@ public class SwerveModule {
 
         m_angleEncoder.setPositionConversionFactor(SwerveK.ANGLE_ENC_POS_FACTOR);
         m_angleEncoder.setVelocityConversionFactor(SwerveK.ANGLE_ENC_VELO_FACTOR);
-        m_angleEncoder.setInverted(false);
+        m_angleEncoder.setInverted(SwerveK.ANGLE_ENC_INVERTED);
 
         m_angleController = m_angleMotor.getPIDController();
         m_angleController.setFeedbackDevice(m_angleEncoder);
@@ -155,18 +155,18 @@ public class SwerveModule {
 
     public SwerveModuleState getState() {
         return new SwerveModuleState(
-            Conversions.neoToMps(
-                m_driveMotor.getEncoder().getVelocity(),
-                MAX_VELOCITY),
-            getAbsAngle());
+                Conversions.neoToMps(
+                        m_driveMotor.getEncoder().getVelocity(),
+                        MAX_VELOCITY),
+                getAbsAngle());
     }
 
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
-            Conversions.neoToMeters(
-                m_driveMotor.getEncoder().getPosition(),
-                WHEEL_CIRCUMFERENCE,
-                DRIVE_GEAR_RATIO),
-            getAbsAngle());
+                Conversions.neoToMeters(
+                        m_driveMotor.getEncoder().getPosition(),
+                        WHEEL_CIRCUMFERENCE,
+                        DRIVE_GEAR_RATIO),
+                getAbsAngle());
     }
 }
