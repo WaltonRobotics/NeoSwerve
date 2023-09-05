@@ -31,7 +31,7 @@ public class RobotContainer {
 		swerve.setDefaultCommand(
 				swerve.driveTeleop(
 						() -> driver.getLeftY(),
-						() -> -driver.getLeftX(),
+						() -> driver.getLeftX(),
 						() -> -driver.getRightX()));
 	}
 
